@@ -1,8 +1,8 @@
 FrOM centos:centos7
 MAINTAINER rpreston@redhat.com
-Install required libraries for MarkLogic and container 
-RUN yum update -y && 
-  yum install -y deltarpm initscripts glibc.i686 gdb.x86_64 redhat-lsb.x86_64 && 
+#Install required libraries for MarkLogic and container 
+RUN yum update -y && \ 
+  yum install -y deltarpm initscripts glibc.i686 gdb.x86_64 redhat-lsb.x86_64 && \ 
   yum clean all
 #Set default directory when attaching to container
 WORKDIR /opt
@@ -28,8 +28,8 @@ COPY setup-child.sh /opt
 # Copy the setup-master script to the image
 COPY setup-master.sh /opt
 # Set file permissions of configuration scripts
-RUN chmod a+x /opt/entry-point.sh && 
-  chmod a+x /opt/setup-child.sh && 
+RUN chmod a+x /opt/entry-point.sh && \ 
+  chmod a+x /opt/setup-child.sh && \
   chmod a+x /opt/setup-master.sh
 #Install MarkLogic
 RUN yum -y install /tmp/${MARKLOGIC_RPM} && rm /tmp/${MARKLOGIC_RPM}
